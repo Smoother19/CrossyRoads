@@ -6,10 +6,10 @@ class Player(startX: Int, startY: Int) {
   private val moveDelay: Int = 150 // Le joueur peut bouger tous les 150ms (ajuste selon tes gouts)
 
   def move(dx: Int, dy: Int, maxX: Int, maxY: Int): Unit = {
-    // On regarde l'heure actuelle
+
     val currentTime = System.currentTimeMillis()
 
-    // Si assez de temps s'est écoulé depuis le dernier mouvement
+
     if (currentTime - lastMoveTime > moveDelay) {
 
       val nextX = posX + dx
