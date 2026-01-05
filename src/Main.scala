@@ -1,12 +1,13 @@
 import hevs.graphics.FunGraphics
 import java.awt.Color
+import hevs.graphics.utils.GraphicsBitmap
 import java.awt.event.{KeyAdapter, KeyEvent}
 
 object Main extends App {
 
   val columns = 15      // Largeur de la grille (nombre de cases)
   val rows = 20         // Hauteur de la grille
-  val cellSize = 30     // Taille d'une case en pixels
+  val cellSize = 50     // Taille d'une case en pixels
 
   val windowWidth = columns * cellSize
   val windowHeight = rows * cellSize
@@ -35,6 +36,7 @@ object Main extends App {
           case States.WATER => Color.BLUE
           case States.TREE  => new Color(0, 100, 0)
           case States.CAR   => Color.RED
+          case States.LOG   => new Color(150,90,55)
           case _            => Color.WHITE
         }
 
@@ -86,6 +88,7 @@ object Main extends App {
       carTimer += 1
       if (carTimer >= 10) {
         grid.moveCars()
+        grid.moveLogs()
         carTimer = 0
       }
 
