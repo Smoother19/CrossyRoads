@@ -4,4 +4,5 @@ object States {
   val WATER: Int = 2
   val TREE: Int = 3
   val CAR: Int = 4
+  val LOG: Int = 5
 }

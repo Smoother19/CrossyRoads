@@ -25,7 +25,7 @@ object Inputs extends KeyAdapter {
 
 
   override def keyReleased(e: KeyEvent): Unit = {
-
+    super.keyReleased(e)
   }
 
   def getInputs(): InputState = {

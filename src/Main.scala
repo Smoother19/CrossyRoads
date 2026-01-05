@@ -57,17 +57,10 @@ object Main extends App {
     }
   }
 
-  // Reset Game function
-
-  def resetGame(isGameOver: Boolean, inputs: Inputs): Unit = {
-    isGameOver = false
-    if(WordlGrid.collisionSystemPredict()){
-      isGameOver = true
-      if(inputs.enter){
-        grid.fillEmptyGrid(grid.grid)
-        grid.generateObstacles(grid.grid)
-      }
-    }
+  def resetGame(): Unit = {
+    grid.fillEmptyGrid(grid.grid)
+    grid.generateObstacles(grid.grid)
+    player.forceMove(1, 1, columns/2, rows/2)
   }
 
   // Main
@@ -75,32 +68,44 @@ object Main extends App {
 
   var scrollTimer = 0
   var carTimer = 0
+  var isDead = false
 
   while (true) {
 
-    val inputs = Inputs.getInputs()
-    if (inputs.up)    player.move(0, -1, columns, rows)
-    if (inputs.down)  player.move(0, 1,  columns, rows)
-    if (inputs.left)  player.move(-1, 0, columns, rows)
-    if (inputs.right) player.move(1, 0,  columns, rows)
+    if (!isDead) {
+      val inputs = Inputs.getInputs()
+      if (inputs.up)    player.move(0, -1, columns, rows, grid)
+      if (inputs.down)  player.move(0, 1,  columns, rows, grid)
+      if (inputs.left)  player.move(-1, 0, columns, rows, grid)
+      if (inputs.right) player.move(1, 0,  columns, rows, grid)
+
+      scrollTimer += 1
+      if (scrollTimer >= 50) {
+        grid.scrollDown()
+        player.forceMove(0, 1, columns, rows) // Le joueur descend avec le monde
+        scrollTimer = 0 // Reset du timer
+      }
+
+      carTimer += 1
+      if (carTimer >= 10) {
+        grid.moveCars()
+        carTimer = 0
+      }
 
 
+      if (grid.collisionSystemReact(player)) {
+        println("Game Over!")
+        isDead = true
+      }
+    } else {
 
+      val inputs = Inputs.getInputs()
+      if (inputs.enter) {
+        resetGame()
+        isDead = false
 
-    scrollTimer += 1
-    if (scrollTimer >= 50) {
-      grid.scrollDown()
-      player.move(0, 1, columns, rows) // Le joueur descend avec le monde
-      scrollTimer = 0 // Reset du timer
+      }
     }
-
-
-    carTimer += 1
-    if (carTimer >= 10) {
-      grid.moveCars()
-      carTimer = 0
-    }
-
 
     display()
 
