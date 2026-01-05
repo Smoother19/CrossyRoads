@@ -153,4 +153,13 @@ class WorldGrid(length: Int, width: Int) {
       }
     }
   }
+
+  // When the player enter an object
+  def collisionSystemPredict(states: States, player: Player): Unit = {
+
+  }
+  // When an object enter the player
+  def collisionSystemReact(states: States, player: Player): Unit = {
+
+  }
 }

@@ -8,14 +8,12 @@ object Main extends App {
   val rows = 20         // Hauteur de la grille
   val cellSize = 30     // Taille d'une case en pixels
 
-
   val windowWidth = columns * cellSize
   val windowHeight = rows * cellSize
 
   val window = new FunGraphics(windowWidth, windowHeight, "Crossy Road Scala")
   window.setKeyManager(Inputs)
   val grid = new WorldGrid(rows, columns)
-
 
   val player = new Player(columns / 2, rows - 2)
 
@@ -59,7 +57,20 @@ object Main extends App {
     }
   }
 
+  // Reset Game function
 
+  def resetGame(isGameOver: Boolean, inputs: Inputs): Unit = {
+    isGameOver = false
+    if(WordlGrid.collisionSystemPredict()){
+      isGameOver = true
+      if(inputs.enter){
+        grid.fillEmptyGrid(grid.grid)
+        grid.generateObstacles(grid.grid)
+      }
+    }
+  }
+
+  // Main
   var time = 0
 
   var scrollTimer = 0
