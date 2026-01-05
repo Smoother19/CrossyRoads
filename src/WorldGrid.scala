@@ -197,7 +197,7 @@ class WorldGrid(length: Int, width: Int) {
     }
   }
 
-  def collisionSystemPredict(playerPos: (Int, Int), nextPos: (Int, Int)): Boolean = {
+  def collisionSystemPredict(nextPos: (Int, Int)): Boolean = {
     val nextPoseState = getCell(nextPos._1, nextPos._2)
     nextPoseState == States.CAR
   }

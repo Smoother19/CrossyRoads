@@ -16,7 +16,7 @@ class Player(startX: Int, startY: Int) {
       val nextY = posY + dy
 
       if (nextX >= 0 && nextX < maxX && nextY >= 0 && nextY < maxY) {
-        if (!grid.collisionSystemPredict((posX, posY), (nextX, nextY))) {
+        if (!grid.collisionSystemPredict((nextX, nextY))) {
           posX = nextX
           posY = nextY
           lastMoveTime = currentTime

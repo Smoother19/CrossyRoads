@@ -1,6 +1,7 @@
 import hevs.graphics.FunGraphics
-import java.awt.Color
 import hevs.graphics.utils.GraphicsBitmap
+
+import java.awt.Color
 import java.awt.event.{KeyAdapter, KeyEvent}
 
 object Main extends App {
@@ -21,39 +22,40 @@ object Main extends App {
   grid.fillEmptyGrid(grid.grid)
   grid.generateObstacles(grid.grid)
 
-  def display(): Unit = {
+  val imgGrass   = new GraphicsBitmap("/grass.jpg")
+  val imgRoad    = new GraphicsBitmap("/road.png")
+  val imgWater   = new GraphicsBitmap("/water.jpg")
+  val imgCar     = new GraphicsBitmap("/car.png")
+  val imgLog     = new GraphicsBitmap("/log.jpg")
+  val imgTree    = new GraphicsBitmap("/grass.jpg")
+  val imgChicken = new GraphicsBitmap("/imageChicken.png")
 
+  def display(): Unit = {
     for (y <- 0 until rows) {
       for (x <- 0 until columns) {
-
-
         val cellType = grid.getCell(x, y)
+        val posX = x * cellSize
+        val posY = y * cellSize
 
-
-        val color = cellType match {
-          case States.GRASS => new Color(34, 139, 34)
-          case States.ROAD  => Color.GRAY
-          case States.WATER => Color.BLUE
-          case States.TREE  => new Color(0, 100, 0)
-          case States.CAR   => Color.RED
-          case States.LOG   => new Color(150,90,55)
-          case _            => Color.WHITE
+        val bgBitmap = cellType match {
+          case States.WATER | States.LOG => imgWater
+          case States.ROAD | States.CAR  => imgRoad
+          case _                         => imgGrass
         }
 
-        window.setColor(color)
-        window.drawFillRect(x * cellSize, y * cellSize, cellSize, cellSize)
+        window.drawPicture(posX, posY, bgBitmap)
 
-
-        window.setColor(Color.BLACK)
-        window.drawRect(x * cellSize, y * cellSize, cellSize, cellSize)
-
-        val (px, py) = player.getPos()
-
-        window.setColor(Color.YELLOW)
-
-        window.drawFillRect(px * cellSize + 5, py * cellSize + 5, cellSize - 10, cellSize - 10)
+        cellType match {
+          case States.CAR  => window.drawPicture(posX, posY, imgCar)
+          case States.LOG  => window.drawPicture(posX, posY, imgLog)
+          case States.TREE => window.drawPicture(posX, posY, imgTree)
+          case _ => ()
+        }
       }
     }
+
+    val (px, py) = player.getPos()
+    window.drawPicture(px * cellSize, py * cellSize, imgChicken)
   }
 
   def resetGame(): Unit = {
@@ -65,12 +67,14 @@ object Main extends App {
   // Main
   var time = 0
 
+  val maxTime = 30
   var scrollTimer = 0
   var carTimer = 0
+  var logTimer = 0
   var isDead = false
 
   while (true) {
-
+    val startTime = System.currentTimeMillis()
     if (!isDead) {
       val inputs = Inputs.getInputs()
       if (inputs.up)    player.move(0, -1, columns, rows, grid)
@@ -88,8 +92,28 @@ object Main extends App {
       carTimer += 1
       if (carTimer >= 10) {
         grid.moveCars()
-        grid.moveLogs()
         carTimer = 0
+      }
+
+      logTimer += 1
+      if (logTimer >= 20) {
+        // 2. Mouvement Passif (Suivre la bûche)
+
+        // On vérifie SI le joueur est sur une bûche AVANT de bouger les bûches
+        val (px, py) = player.getPos()
+        val isOnLog = grid.getCell(px, py) == States.LOG
+
+        // On déplace les bûches
+        grid.moveLogs()
+
+        // Si le joueur était sur une bûche, on le déplace dans la même direction
+        if (isOnLog) {
+           // CORRECTION : On utilise la direction stockée dans la grille pour cette ligne spécifique
+           val direction = grid.rowDirections(py)
+           player.forceMove(direction, 0, columns, rows)
+        }
+
+        logTimer = 0
       }
 
 
@@ -108,7 +132,8 @@ object Main extends App {
     }
 
     display()
+    val endTime = System.currentTimeMillis()
 
-    Thread.sleep(30) // 30ms = ~33 FPS
+    Thread.sleep(maxTime - (endTime - startTime)) // 30ms = ~33 FPS
   }
 }
