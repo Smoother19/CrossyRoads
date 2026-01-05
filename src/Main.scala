@@ -38,7 +38,6 @@ object Main extends App {
           case _            => Color.WHITE
         }
 
-
         window.setColor(color)
         window.drawFillRect(x * cellSize, y * cellSize, cellSize, cellSize)
 
@@ -48,9 +47,7 @@ object Main extends App {
 
         val (px, py) = player.getPos()
 
-
         window.setColor(Color.YELLOW)
-
 
         window.drawFillRect(px * cellSize + 5, py * cellSize + 5, cellSize - 10, cellSize - 10)
       }
@@ -60,7 +57,7 @@ object Main extends App {
   def resetGame(): Unit = {
     grid.fillEmptyGrid(grid.grid)
     grid.generateObstacles(grid.grid)
-    player.forceMove(1, 1, columns/2, rows/2)
+    player.resetPos()
   }
 
   // Main

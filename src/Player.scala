@@ -36,6 +36,11 @@ class Player(startX: Int, startY: Int) {
       }
   }
 
+  def resetPos(): Unit = {
+    posX = startX
+    posY = startY
+  }
+
   def getPos(): (Int, Int) = {
     (posX, posY)
   }
