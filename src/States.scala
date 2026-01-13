@@ -3,6 +3,8 @@ object States {
   val ROAD: Int = 1
   val WATER: Int = 2
   val TREE: Int = 3
+
   val CAR: Int = 4
   val LOG: Int = 5
+
 }

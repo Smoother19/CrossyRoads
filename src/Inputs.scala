@@ -19,6 +19,7 @@ object Inputs extends KeyAdapter {
       case KeyEvent.VK_A => isLeftPressed = true
       case KeyEvent.VK_D => isRightPressed = true
       case KeyEvent.VK_ENTER => isEnterPressed = true
+      case _ => println("Press WASD to play our game !")
     }
 
   }
@@ -30,7 +31,7 @@ object Inputs extends KeyAdapter {
 
   def getInputs(): InputState = {
 
-    val state = InputState(isUpPressed, isDownPressed, isLeftPressed, isRightPressed,isEnterPressed)
+    val state = InputState(isUpPressed, isDownPressed, isLeftPressed, isRightPressed, isEnterPressed)
 
     isUpPressed = false
     isDownPressed = false
