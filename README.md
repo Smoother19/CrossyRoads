@@ -9,7 +9,7 @@
 
 Ce projet est une réimplémentation du célèbre jeu d'arcade **Crossy Road**, développée en langage Scala avec la librairie `FunGraphics`.
 
-Le joueur incarne une poule qui doit traverser une série infinie de routes et de rivières générées procéduralement. L'objectif est d'avancer le plus loin possible pour accumuler du score, tout en évitant de se faire écraser par des voitures ou de tomber dans l'eau. Le jeu intègre un système de défilement automatique (scrolling) qui force le joueur à rester en mouvement.
+Le joueur incarne une poule qui doit traverser une série infinie de routes et de rivières générées aléatoirement. L'objectif est d'avancer le plus loin possible pour accumuler du score, tout en évitant de se faire écraser par des voitures ou de tomber dans l'eau. Le jeu intègre un système de défilement automatique (scrolling) qui force le joueur à rester en mouvement.
 
 ### Aperçu
 
