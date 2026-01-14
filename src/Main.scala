@@ -2,20 +2,21 @@ import hevs.graphics.FunGraphics
 
 object Main extends App {
 
-  val window = new FunGraphics(500, 500, "CrossyRoads project Scala")
-
+  val window = new FunGraphics(
+    GameConfig.WINDOW_WIDTH,
+    GameConfig.WINDOW_HEIGHT,
+    "Crossy Road Scala"
+  )
   window.setKeyManager(Inputs)
 
-  gameLoop()
+  val game = new Game(window)
+  game.init()
 
-  def gameLoop(): Unit = {
-    while (true) {
-      val inputs = Inputs.getInputs()
-
-    }
+  while (game.isGameRunning) {
+    game.update()
+    game.render()
+    window.syncGameLogic(GameConfig.TARGET_FPS)
   }
 
-  def display(): Unit = ???
-
-  def checkCollision(pos: Array[Int], nextPos: Array[Int]): Boolean = ???
+  System.exit(0)
 }

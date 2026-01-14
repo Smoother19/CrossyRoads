@@ -1,7 +1,6 @@
 import java.awt.event.{KeyAdapter, KeyEvent}
 
-
-case class InputState(up: Boolean, down: Boolean, left: Boolean, right: Boolean)
+case class InputState(up: Boolean, down: Boolean, left: Boolean, right: Boolean, enter: Boolean)
 
 object Inputs extends KeyAdapter {
 
@@ -9,43 +8,37 @@ object Inputs extends KeyAdapter {
   var isDownPressed = false
   var isLeftPressed = false
   var isRightPressed = false
+  var isEnterPressed = false
 
   override def keyPressed(e: KeyEvent): Unit = {
     val key = e.getKeyCode
 
-    if (key == KeyEvent.VK_W) {
-      isUpPressed = true
+    key match{
+      case KeyEvent.VK_W => isUpPressed = true
+      case KeyEvent.VK_S => isDownPressed = true
+      case KeyEvent.VK_A => isLeftPressed = true
+      case KeyEvent.VK_D => isRightPressed = true
+      case KeyEvent.VK_ENTER => isEnterPressed = true
+      case _ => println("Press WASD to play our game !")
     }
-    else if (key == KeyEvent.VK_S) {
-      isDownPressed = true
-    }
-    else if (key == KeyEvent.VK_A) {
-      isLeftPressed = true
-    }
-    else if (key == KeyEvent.VK_D) {
-      isRightPressed = true
-    }
+
   }
 
-  override def keyReleased(e: KeyEvent): Unit = {
-    val key = e.getKeyCode
 
-    // On remet la variable à false
-    if (key == KeyEvent.VK_W) {
-      isUpPressed = false
-    }
-    else if (key == KeyEvent.VK_S) {
-      isDownPressed = false
-    }
-    else if (key == KeyEvent.VK_A) {
-      isLeftPressed = false
-    }
-    else if (key == KeyEvent.VK_D) {
-      isRightPressed = false
-    }
+  override def keyReleased(e: KeyEvent): Unit = {
+    super.keyReleased(e)
   }
 
   def getInputs(): InputState = {
-    return InputState(isUpPressed, isDownPressed, isLeftPressed, isRightPressed)
+
+    val state = InputState(isUpPressed, isDownPressed, isLeftPressed, isRightPressed, isEnterPressed)
+
+    isUpPressed = false
+    isDownPressed = false
+    isLeftPressed = false
+    isRightPressed = false
+    isEnterPressed = false
+
+    return state
   }
 }
