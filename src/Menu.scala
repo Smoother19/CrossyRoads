@@ -54,11 +54,9 @@ class Menu(window: FunGraphics) {
 
   def selectNext(): Unit = {
     selectedOption = (selectedOption + 1) % options.length
-    println("l")
   }
 
   def selectPrevious(): Unit = {
     selectedOption = (selectedOption - 1 + options.length) % options.length
-    println("l")
   }
 }

@@ -12,14 +12,12 @@ object GameConfig {
   val TARGET_FPS: Int = 30
   val SCROLL_INTERVAL: Int = 50
 
-  val PLAYER_MOVE_DELAY: Int = 10
 
   val CAR_SPAWN_CHANCE: Int = 25
   val CAR_RESPAWN_CHANCE: Int = 15
   val CAR_MOVE_INTERVAL: Int = 10
 
   val LOG_SPAWN_CHANCE: Int = 25
-  val LOG_RESPAWN_CHANCE: Int = 20
   val LOG_MOVE_INTERVAL: Int = 20
 
   val IMG_GRASS = new GraphicsBitmap("/res/img/grass.jpg")
@@ -27,7 +25,6 @@ object GameConfig {
   val IMG_WATER = new GraphicsBitmap("/res/img/water.jpg")
   val IMG_CAR = new GraphicsBitmap("/res/img/car.png")
   val IMG_LOG = new GraphicsBitmap("/res/img/log.png")
-  val IMG_TREE = new GraphicsBitmap("/res/img/grass.jpg")
   val IMG_CHICKEN = new GraphicsBitmap("/res/img/imageChicken.png")
   val IMG_MENU = new GraphicsBitmap("/res/img/menu.png")
 
