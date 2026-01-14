@@ -1,9 +1,17 @@
 # CrossyRoads
 Prog project with FunGraphics
+
 Create By Alan Ferilli & Noah Abraão
+
 ISCB Students 1st year
 
+Contact : 
+  alan.ferilli@students.hevs.ch
+  noah.abraao@students.hevs.ch
+
 # Description
+
+This project is a non-profit project !
 
 Imagine beeing a chicken who wants to cross the raod... Stop thinking now you can be it.
 Start your adventure on grass and try to be the chicken with the most score. You will win point by crossing roads and rivers.
@@ -14,8 +22,8 @@ Think in advance and everthing will be fine.🐔
 
 # How to play
 
-1. Pull the projet
-2. Lunch it with Crtl+F5
+1. Clone the projet
+2. Open Main.scala and Lunch the project
 3. You'll be in the Menu : 
   <img width="350" height="500" alt="image" src="https://github.com/user-attachments/assets/6b40ccd1-2682-4857-97c7-694cff9a3af3" />
   
