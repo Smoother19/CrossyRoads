@@ -42,7 +42,7 @@ Le jeu se contrôle entièrement au clavier :
 * **D** : Aller à droite
 * **Enter** : Valider / Sélectionner dans le menu
 
-PS: W et S permettent de se déplacer dans le menu
+PS: W et S permettent aussi de se déplacer dans le menu
 
 ### Règles du jeu
 * **Score** : Chaque pas vers l'avant augmente votre score. Reculer le diminue.
